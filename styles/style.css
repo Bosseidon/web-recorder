@@ -1,0 +1,10 @@
+/*Record Page*/
+#record-audio-page{
+    display: block;
+    margin: 0 auto;
+}
+
+#record-audio-button{
+    height: 25px;
+    width: 100px;
+}
