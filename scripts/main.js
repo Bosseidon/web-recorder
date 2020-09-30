@@ -1,24 +1,37 @@
 function startRecordingButton(){
-    /*Verify if Microphone is already enabled*/
-    navigator.permissions.query({name: "microphone"}).then(function(result){
-        if(result.state == "granted"){
-            /*Go to recording page and record audio*/
-            recordAudio();
-        }
-        else if(result.state == "denied"){
-            /*Go to mic no enabled page (and maybe offer a button there that enables mic)*/
-        }
-        else if(result.state == "prompt"){
-            /*Ask for mic to be used and reiterate function*/
-            navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(recordAudio());
-            console.log(result);
-        }
-        else{
-            /*Some error treatment, or possibly just a prompt clone*/
-        }
-    });
-}
+    let shouldStop = false;
+    let stopped = false;
 
-function recordAudio(){
-    console.log("Yay");
-}
+    const downloadLink = document.getElementById("download-audio-file-link");
+    const stopButton = document.getElementById("stop-recording-button");
+
+    stopButton.addEventListener('click', function(){
+        shouldStop = true;
+    });
+
+    var handleSuccess = function(stream){
+        const recordedChunks = [];
+        const options = {mimeType: "video/webm;codecs=vp9"};
+        const mediaRecorder = new MediaRecorder(stream, options);
+
+        mediaRecorder.addEventListener("dataavailable", function(e){
+            if(e.data.size > 0){
+                recordedChunks.push(e.data);
+            }
+            if(shouldStop === true && stopped === false){
+                mediaRecorder.stop();
+                stopped = true;
+                console.log("Stop");
+            }
+        });
+
+        mediaRecorder.addEventListener("stop", function(){
+            downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+            downloadLink.download = "acetest.wav";
+        });
+
+        mediaRecorder.start();
+    };
+
+    navigator.mediaDevices.getUserMedia({audio: true, video: false}).then(handleSuccess);
+};
