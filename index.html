@@ -13,9 +13,12 @@
             <div id="record-audio-page">
                 <h1 id="record-audio-title">Record Audio</h1>
                 <p id="record-audio-text">Record an audio clip to send to yourself.</p>
-                <button type="button" id="record-audio-button" onclick="startRecordingButton()">Record</button>
-                <button type="button" id="stop-recording-button">Stahp</button>
-                <a id="download-audio-file-link" href="">Download</a>
+                <button type="button" id="start-button">Start</button>
+                <button type="button" id="record-button" 
+                    onclick="startRecording()">Record</button>
+                <button type="button" id="stop-button">Stop</button>
+                <button type="button" id="play-button">Play</button>
+                <button type="button" id="download-button">Download</button>
                 <audio id="audio-playback-player" controls></audio>
             </div>
 
