@@ -13,6 +13,9 @@ const downloadButton = document.getElementById("download-button");
 //Audio
 const recordedAudio = document.getElementById("audio-playback-player");
 
+//Recording dot
+const recordingDot = document.getElementById("recording-dot");
+
 //Blobs
 const auxBLobs = null;
 
@@ -80,14 +83,21 @@ function startRecording(){
 
     recordButton.disabled = true;
     stopButton.disabled = false;
+    playButton.disabled = true;
+    downloadButton.disabled = true;
+
+    recordingDot.setAttribute("style","display: inline-block");
 }
 
 function stopRecording(){
     mediaRecorder.stop();
 
+    recordButton.disabled = false;
     stopButton.disabled = true;
     playButton.disabled = false;
     downloadButton.disabled = false;
+
+    recordingDot.setAttribute("style","display: none");
 }
 
 function handleSuccess(stream){
