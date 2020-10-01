@@ -4,7 +4,7 @@ let mediaRecorder;
 let recordedBlobs;
 
 //Buttons
-const startButton = document.getElementById("start-button");
+//const startButton = document.getElementById("start-button");
 const recordButton = document.getElementById("record-button");
 const stopButton = document.getElementById("stop-button");
 const playButton = document.getElementById("play-button");
@@ -13,9 +13,13 @@ const downloadButton = document.getElementById("download-button");
 //Audio
 const recordedAudio = document.getElementById("audio-playback-player");
 
-recordButton.addEventListener("click", () => {
+//Blobs
+const auxBLobs = null;
+
+//Retired function
+/*recordButton.addEventListener("click", () => {
     startRecording();
-});
+});*/
 
 stopButton.addEventListener("click", () => {
     stopRecording();
@@ -73,10 +77,17 @@ function startRecording(){
     mediaRecorder.ondataavailable = handleDataAvailable;
     mediaRecorder.start();
     console.log("MediaRecorder started", mediaRecorder);
+
+    recordButton.disabled = true;
+    stopButton.disabled = false;
 }
 
 function stopRecording(){
     mediaRecorder.stop();
+
+    stopButton.disabled = true;
+    playButton.disabled = false;
+    downloadButton.disabled = false;
 }
 
 function handleSuccess(stream){
@@ -90,11 +101,15 @@ async function init(constraints){
     }
     catch(e){
         console.error("navigator.getUserMedia error: ", e);
+        document.getElementById("record-audio-page").setAttribute("style","display: none;");
+        document.getElementById("microphone-error-page").setAttribute("style", "display: block");
     }
 }
 
-startButton.addEventListener("click", async() => {
+recordButton.addEventListener("click", async() => {
     const constraints = {audio:true, video:false};
     console.log("Using media contraints: ", constraints);
     await init(constraints);
+
+    startRecording();
 });

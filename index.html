@@ -10,19 +10,25 @@
     <body>
         <div id="main-container">
             <!--Record Audio Page-->
-            <div id="record-audio-page">
-                <h1 id="record-audio-title">Record Audio</h1>
-                <p id="record-audio-text">Record an audio clip to send to yourself.</p>
-                <button type="button" id="start-button">Start</button>
-                <button type="button" id="record-button" 
-                    onclick="startRecording()">Record</button>
-                <button type="button" id="stop-button">Stop</button>
-                <button type="button" id="play-button">Play</button>
-                <button type="button" id="download-button">Download</button>
-                <audio id="audio-playback-player" controls></audio>
+            <div id="record-audio-page" class="page">
+                <h1 id="record-audio-title" class="title">Online Audio Recorder</h1><br>
+                <p id="record-audio-text" class="text">Record an audio clip.</p>
+                <div id="buttons">
+                    <button type="button" id="record-button">Record</button>
+                    <button type="button" id="stop-button" disabled>Stop</button>
+                    <button type="button" id="play-button" disabled>Play</button>
+                    <button type="button" id="download-button" disabled>Download</button>
+                </div>
+                <div id="audio-player-flex">
+                    <audio id="audio-playback-player" controls></audio>
+                </div>
             </div>
 
             <!--Microphone Access Denied Page-->
+            <div id="microphone-error-page" class="page">
+                <h1 class="title">Microphone denied</h1>
+                <p class="text">The application needs microphone access to properly work.</p>
+            </div>
         </div>
 
     <!--Scripts-->

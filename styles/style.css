@@ -1,10 +1,29 @@
 /*Record Page*/
 #record-audio-page{
     display: block;
-    margin: 0 auto;
 }
 
-#record-audio-button{
-    height: 25px;
-    width: 100px;
+.title{
+    text-align: center;
+}
+
+.text{
+    text-align: center;
+}
+
+#buttons{
+    display: flex;
+    margin: 0 5px;
+    justify-content: center;
+}
+
+#audio-player-flex{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/*Erro Page*/
+#microphone-error-page{
+    display: none;
 }
